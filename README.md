@@ -30,6 +30,13 @@ ComfyUI/models/pid/checkpoints/PiD_res2k_sr4x_official_flux_distill_4step/model_
 ComfyUI/models/pid/checkpoints/PiD_res2kto4k_sr4x_official_flux_distill_4step/model_ema_bf16.pth
 ```
 
+Official downloads:
+
+- [PiD model hub](https://huggingface.co/nvidia/PiD)
+- [ae.safetensors](https://huggingface.co/nvidia/PiD/resolve/main/checkpoints/ae.safetensors?download=true)
+- [PiD_res2k_sr4x_official_flux_distill_4step/model_ema_bf16.pth](https://huggingface.co/nvidia/PiD/resolve/main/checkpoints/PiD_res2k_sr4x_official_flux_distill_4step/model_ema_bf16.pth?download=true)
+- [PiD_res2kto4k_sr4x_official_flux_distill_4step/model_ema_bf16.pth](https://huggingface.co/nvidia/PiD/resolve/main/checkpoints/PiD_res2kto4k_sr4x_official_flux_distill_4step/model_ema_bf16.pth?download=true)
+
 4. Restart ComfyUI.
 
 ## Workflow
