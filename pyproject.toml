@@ -1,0 +1,44 @@
+[project]
+name = "nvidia-pid-decoder"
+version = "0.1.0"
+description = "ComfyUI custom nodes for NVIDIA PiD final latent decoding with Flux1 and Z-Image."
+license = { file = "LICENSE" }
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Environment :: GPU :: NVIDIA CUDA",
+]
+dependencies = [
+    "hydra-core==1.3.2",
+    "omegaconf==2.3.0",
+    "attrs",
+    "einops",
+    "loguru",
+    "termcolor",
+    "fvcore",
+    "iopath",
+    "pynvml",
+    "wandb",
+    "imageio",
+    "opencv-python-headless",
+    "pandas",
+    "safetensors",
+    "huggingface-hub>=1.0",
+    "sentencepiece",
+    "boto3",
+    "botocore",
+    "transformers>=4.57.0",
+    "diffusers>=0.37.0",
+]
+
+[project.urls]
+Repository = "https://github.com/npiriou/ComfyUI-PiD"
+Documentation = "https://github.com/npiriou/ComfyUI-PiD#readme"
+"Bug Tracker" = "https://github.com/npiriou/ComfyUI-PiD/issues"
+
+[tool.comfy]
+PublisherId = "npiriou"
+DisplayName = "PiD Decoder"
+requires-comfyui = ">=0.21.0"

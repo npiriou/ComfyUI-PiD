@@ -1,0 +1,5 @@
+# Local-only generated files
+examples/generated/
+
+# Development metadata
+.gitignore

@@ -1,0 +1,163 @@
+{
+  "prompt": {
+    "1": {
+      "class_type": "UNETLoader",
+      "inputs": {
+        "unet_name": "flux1-dev.safetensors",
+        "weight_dtype": "default"
+      }
+    },
+    "2": {
+      "class_type": "DualCLIPLoader",
+      "inputs": {
+        "clip_name1": "clip_l.safetensors",
+        "clip_name2": "t5xxl_fp16.safetensors",
+        "type": "flux"
+      }
+    },
+    "3": {
+      "class_type": "CLIPTextEncodeFlux",
+      "inputs": {
+        "clip": [
+          "2",
+          0
+        ],
+        "clip_l": "a cinematic portrait of a tabby cat sitting on a wooden chair, natural light, detailed fur",
+        "t5xxl": "a cinematic portrait of a tabby cat sitting on a wooden chair, natural light, detailed fur",
+        "guidance": 3.5
+      }
+    },
+    "4": {
+      "class_type": "CLIPTextEncodeFlux",
+      "inputs": {
+        "clip": [
+          "2",
+          0
+        ],
+        "clip_l": "",
+        "t5xxl": "",
+        "guidance": 3.5
+      }
+    },
+    "5": {
+      "class_type": "EmptySD3LatentImage",
+      "inputs": {
+        "width": 1024,
+        "height": 1024,
+        "batch_size": 1
+      }
+    },
+    "6": {
+      "class_type": "ModelSamplingFlux",
+      "inputs": {
+        "model": [
+          "1",
+          0
+        ],
+        "max_shift": 1.15,
+        "base_shift": 0.5,
+        "width": 1024,
+        "height": 1024
+      }
+    },
+    "7": {
+      "class_type": "KSampler",
+      "inputs": {
+        "model": [
+          "6",
+          0
+        ],
+        "seed": 123456789,
+        "steps": 8,
+        "cfg": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple",
+        "positive": [
+          "3",
+          0
+        ],
+        "negative": [
+          "4",
+          0
+        ],
+        "latent_image": [
+          "5",
+          0
+        ],
+        "denoise": 1.0
+      }
+    },
+    "8": {
+      "class_type": "VAELoader",
+      "inputs": {
+        "vae_name": "ae.safetensors"
+      }
+    },
+    "9": {
+      "class_type": "VAEDecode",
+      "inputs": {
+        "samples": [
+          "7",
+          0
+        ],
+        "vae": [
+          "8",
+          0
+        ]
+      }
+    },
+    "10": {
+      "class_type": "PiD Model Loader",
+      "inputs": {
+        "pid_checkpoint": "checkpoints\\PiD_res2kto4k_sr4x_official_flux_distill_4step\\model_ema_bf16.pth",
+        "backbone_type": "flux1",
+        "precision": "bf16",
+        "device": "auto"
+      }
+    },
+    "11": {
+      "class_type": "PiD Decode",
+      "inputs": {
+        "latent": [
+          "7",
+          0
+        ],
+        "vae": [
+          "8",
+          0
+        ],
+        "pid_model": [
+          "10",
+          0
+        ],
+        "prompt": "a cinematic portrait of a tabby cat sitting on a wooden chair, natural light, detailed fur",
+        "seed": 123456789,
+        "pid_steps": 4,
+        "cfg_scale": 1.0,
+        "scale": 4,
+        "shift": -1.0,
+        "degrade_sigma": 0.0
+      }
+    },
+    "12": {
+      "class_type": "SaveImage",
+      "inputs": {
+        "images": [
+          "9",
+          0
+        ],
+        "filename_prefix": "flux1_pid_2kto4k_baseline"
+      }
+    },
+    "13": {
+      "class_type": "SaveImage",
+      "inputs": {
+        "images": [
+          "11",
+          0
+        ],
+        "filename_prefix": "flux1_pid_2kto4k_output"
+      }
+    }
+  }
+}
